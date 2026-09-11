@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CGPA Compass</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== NAVIGATION BAR ===================== -->
+  <header class="navbar">
+    <div class="nav-container">
+      <div class="logo">CGPA Compass</div>
+      <nav class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#calculator">Calculator</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===================== HERO SECTION ===================== -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Track Your Grades. Reach Your Goal.</h1>
+      <p>
+        Calculate your SGPA, track your CGPA, and plan the grades you need
+        to reach your target.
+      </p>
+
+      <!-- Each button switches to the matching tab AND scrolls down to it -->
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="goToCalculator('sgpa')">SGPA Calculator</button>
+        <button class="btn btn-primary" onclick="goToCalculator('cgpa')">CGPA Calculator</button>
+        <button class="btn btn-primary" onclick="goToCalculator('target')">Target CGPA</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CALCULATOR SECTION ===================== -->
+  <section class="calculator-section" id="calculator">
+    <h2 class="section-title">Grade Calculators</h2>
+
+    <!-- Tab buttons to switch between SGPA, CGPA and Target CGPA -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="sgpa">SGPA Calculator</button>
+      <button class="tab-btn" data-tab="cgpa">CGPA Calculator</button>
+      <button class="tab-btn" data-tab="target">Target CGPA</button>
+    </div>
+
+    <!-- ---------------- SGPA CALCULATOR ---------------- -->
+    <div class="tab-content active" id="sgpa-tab">
+      <div class="card">
+        <p class="card-note">
+          Grade points used: A+ = 10, A = 9, B+ = 8, B = 7, C+ = 6, C = 5, D = 4, F = 0
+        </p>
+
+        <!-- Table-like header for subject rows -->
+        <div class="subject-header">
+          <span>Subject Name</span>
+          <span>Credits</span>
+          <span>Grade</span>
+          <span></span>
+        </div>
+
+        <!-- Subject rows will be added here by JavaScript -->
+        <div id="subject-list"></div>
+
+        <div class="card-actions">
+          <button id="add-subject-btn" class="btn btn-secondary">+ Add Subject</button>
+          <button id="calculate-sgpa-btn" class="btn btn-primary">Calculate SGPA</button>
+        </div>
+
+        <div class="result-box" id="sgpa-result" style="display: none;">
+          Your SGPA: <span id="sgpa-value">0.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------------- CGPA CALCULATOR ---------------- -->
+    <div class="tab-content" id="cgpa-tab">
+      <div class="card">
+        <p class="card-note">
+          Enter the SGPA you scored in each semester to find your overall CGPA.
+        </p>
+
+        <!-- Table-like header for semester rows -->
+        <div class="semester-header">
+          <span>Semester</span>
+          <span>SGPA</span>
+          <span></span>
+        </div>
+
+        <!-- Semester rows will be added here by JavaScript -->
+        <div id="semester-list"></div>
+
+        <div class="card-actions">
+          <button id="add-semester-btn" class="btn btn-secondary">+ Add Semester</button>
+          <button id="calculate-cgpa-btn" class="btn btn-primary">Calculate CGPA</button>
+        </div>
+
+        <div class="result-box" id="cgpa-result" style="display: none;">
+          Your CGPA: <span id="cgpa-value">0.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------------- TARGET CGPA CALCULATOR ---------------- -->
+    <div class="tab-content" id="target-tab">
+      <div class="card">
+        <p class="card-note">
+          Find out what average SGPA you need in your remaining semesters
+          to reach your target CGPA.
+        </p>
+
+        <div class="target-form">
+          <label>
+            Current CGPA
+            <input type="number" id="current-cgpa" placeholder="e.g. 8.2" min="0" max="10" step="0.01" />
+          </label>
+
+          <label>
+            Semesters Completed
+            <input type="number" id="semesters-completed" placeholder="e.g. 4" min="0" step="1" />
+          </label>
+
+          <label>
+            Semesters Remaining
+            <input type="number" id="semesters-remaining" placeholder="e.g. 2" min="1" step="1" />
+          </label>
+
+          <label>
+            Target CGPA
+            <input type="number" id="target-cgpa" placeholder="e.g. 8.8" min="0" max="10" step="0.01" />
+          </label>
+        </div>
+
+        <div class="card-actions">
+          <button id="calculate-target-btn" class="btn btn-primary">Calculate Required SGPA</button>
+        </div>
+
+        <div class="result-box" id="target-result" style="display: none;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS SECTION ===================== -->
+  <section class="how-it-works">
+    <h2 class="section-title">How It Works</h2>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Enter your grades</h3>
+        <p>Add your subjects or semester SGPAs.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Calculate your performance</h3>
+        <p>Get your SGPA or CGPA instantly.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Plan your target</h3>
+        <p>Find the SGPA you need to hit your goal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <p><strong>CGPA Compass</strong></p>
+    <p>Built for students.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

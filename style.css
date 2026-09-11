@@ -1,0 +1,476 @@
+/* ============================================================
+   CGPA COMPASS - STYLESHEET
+   Organized in the same order as the sections in index.html
+   ============================================================ */
+
+/* ---------- Reset & Base Styles ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #2d2d3a;
+  line-height: 1.6;
+  background-color: #f7f7fb;
+}
+
+/* Reusable color variables - change these to re-theme the whole site */
+:root {
+  --primary-blue: #4f6df5;
+  --primary-purple: #7b5cf0;
+  --gradient: linear-gradient(135deg, #4f6df5, #7b5cf0);
+  --text-dark: #2d2d3a;
+  --text-light: #6b6b7b;
+  --card-bg: #ffffff;
+  --border-color: #e4e4f0;
+  --success-bg: #e9f9ef;
+  --success-text: #1c9a5b;
+  --error-bg: #fdeceb;
+  --error-text: #e5484d;
+}
+
+/* ---------- Navigation Bar ---------- */
+.navbar {
+  background: var(--card-bg);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 24px;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+  margin-left: 28px;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary-blue);
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+  background: var(--gradient);
+  color: #ffffff;
+  text-align: center;
+  padding: 90px 24px;
+}
+
+.hero-content {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  margin-bottom: 30px;
+  opacity: 0.92;
+}
+
+/* Row of buttons under the hero text */
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  padding: 12px 26px;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(79, 109, 245, 0.35);
+}
+
+.hero .btn-primary {
+  background: #ffffff;
+  color: var(--primary-blue);
+}
+
+/* Inside the calculator section, primary button needs the gradient look */
+.calculator-section .btn-primary {
+  background: var(--gradient);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background: #eef0ff;
+  color: var(--primary-blue);
+}
+
+/* ---------- Calculator Section ---------- */
+.calculator-section {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 70px 24px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  color: var(--text-dark);
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.tab-btn {
+  padding: 10px 22px;
+  border: 2px solid var(--border-color);
+  background: var(--card-bg);
+  border-radius: 30px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
+}
+
+.tab-btn.active {
+  background: var(--gradient);
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* Tab content visibility */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card container used by all three calculators */
+.card {
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.card-note {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-bottom: 20px;
+}
+
+/* Column headers above the input rows */
+.subject-header,
+.semester-header {
+  display: grid;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-light);
+  padding: 0 4px 8px 4px;
+}
+
+.subject-header {
+  grid-template-columns: 2fr 1fr 1fr 40px;
+  gap: 12px;
+}
+
+.semester-header {
+  grid-template-columns: 1fr 1fr 40px;
+  gap: 12px;
+}
+
+/* Each dynamically-added input row */
+.subject-row,
+.semester-row {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.subject-row {
+  grid-template-columns: 2fr 1fr 1fr 40px;
+}
+
+.semester-row {
+  grid-template-columns: 1fr 1fr 40px;
+}
+
+.subject-row input,
+.subject-row select,
+.semester-row input {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  width: 100%;
+  transition: border-color 0.2s ease;
+}
+
+.subject-row input:focus,
+.subject-row select:focus,
+.semester-row input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+}
+
+/* Auto-numbered "Semester 1", "Semester 2"... label */
+.semester-label {
+  font-weight: 600;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+}
+
+/* Remove-row (x) button */
+.remove-btn {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.remove-btn:hover {
+  background: #f9d2d0;
+}
+
+/* Buttons under each calculator card */
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+/* Result display box (used by all three calculators) */
+.result-box {
+  margin-top: 24px;
+  padding: 18px;
+  border-radius: 14px;
+  background: #eef0ff;
+  color: var(--primary-blue);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Result box variants for the Target CGPA calculator */
+.result-box.success {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.result-box.error {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+/* ---------- Target CGPA Form ---------- */
+.target-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.target-form label {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  gap: 6px;
+}
+
+.target-form input {
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 400;
+}
+
+.target-form input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+}
+
+/* ---------- How It Works Section ---------- */
+.how-it-works {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.step-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 28px 20px;
+  text-align: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.step-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(79, 109, 245, 0.15);
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 50%;
+  background: var(--gradient);
+  color: #ffffff;
+  font-weight: 700;
+  margin: 0 auto 14px;
+}
+
+.step-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: var(--text-dark);
+}
+
+.step-card p {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  text-align: center;
+  padding: 28px 24px;
+  background: #ffffff;
+  color: var(--text-light);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.footer p {
+  margin: 2px 0;
+}
+
+/* ---------- Responsive Design (Mobile) ---------- */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .nav-links a {
+    margin-left: 16px;
+    font-size: 0.9rem;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  .target-form {
+    grid-template-columns: 1fr;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack subject/semester rows vertically on small screens */
+  .subject-header,
+  .semester-header {
+    display: none; /* labels are shown via placeholders instead */
+  }
+
+  .subject-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "name name"
+      "credits grade"
+      "remove remove";
+  }
+
+  .subject-row input[data-field="name"] { grid-area: name; }
+  .subject-row input[data-field="credits"] { grid-area: credits; }
+  .subject-row select[data-field="grade"] { grid-area: grade; }
+  .subject-row .remove-btn { grid-area: remove; justify-self: end; }
+
+  .semester-row {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "sem sgpa"
+      "remove remove";
+  }
+
+  .semester-row .semester-label { grid-area: sem; }
+  .semester-row input[data-field="sgpa"] { grid-area: sgpa; }
+  .semester-row .remove-btn { grid-area: remove; justify-self: end; }
+}
